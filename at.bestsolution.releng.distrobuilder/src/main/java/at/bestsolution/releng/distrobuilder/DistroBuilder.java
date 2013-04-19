@@ -83,7 +83,7 @@ public class DistroBuilder {
 		collectZipFiles(repos, staticReposDirectory, "shared", os, arch);
 		collectZipFiles(repos, staticReposDirectory, version, os, arch);
 
-		String exec = p2DirectorExecutable + " -vm "+System.getProperty("java.home")+" -nosplash -application org.eclipse.equinox.p2.director -consoleLog -profileProperties org.eclipse.update.install.features=true -profile SDKProfile ";
+		String exec = p2DirectorExecutable + " -vm "+System.getProperty("java.home")+"/bin/java -nosplash -application org.eclipse.equinox.p2.director -consoleLog -profileProperties org.eclipse.update.install.features=true -profile SDKProfile ";
 		exec += " -installIU " + join(iuList,",");
 		exec += " -repository " + join(repos,",") + " ";
 		
@@ -400,6 +400,8 @@ public class DistroBuilder {
 
 	private static void collectZipFiles(List<String> collectedZips, String rootDir, String version, String os, String arch) {
 		File shared = new File(rootDir, version);
+		if (shared.listFiles()==null)
+			return;
 		for (File f : shared.listFiles()) {
 			if (f.isDirectory()) {
 				if (f.getName().equals(os)) {
