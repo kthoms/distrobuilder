@@ -59,6 +59,14 @@ public class InstallUnit implements FilteredElement {
 
 	@Override
 	public String getValue() {
+		if (version != null) {
+			return getName() + "/" + getVersion();
+		}
 		return getName();
+	}
+
+	@Override
+	public String toString() {
+		return getValue();
 	}
 }

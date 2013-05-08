@@ -76,7 +76,7 @@ public class DistroBuilder {
 	
 	private void buildDistro(File targetSdksDir, String name, String version, String os, String arch) {
 		System.out.println("Build distro for " + version + " - " + os + " - " + arch);
-		List<String> iuList = filterList(this.iuList, version, os, arch);
+		List<String> iuList = filterList(this.iuList, null, os, arch);
 		List<String> repos = filterList(this.siteList, version, os, arch);
 		repos.addAll(makeLocalRepos(new File(buildDirectory,"cache"), filterList(this.repoList, version, os, arch)));
 
